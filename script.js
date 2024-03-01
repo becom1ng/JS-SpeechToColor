@@ -1,5 +1,6 @@
 const start = document.getElementById('start');
 const stop = document.getElementById('stop');
+const title = document.querySelector('.title');
 
 const SpeechRecognition =
 	window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -14,9 +15,20 @@ rec.onresult = function (e) {
 		const script = e.results[i][0].transcript.toLowerCase().trim();
 
 		if (isValidColor(script)) {
+			let errorMsg = document.querySelector('.error');
+			if (errorMsg) {
+				title.removeChild(errorMsg);
+			}
 			document.body.style.backgroundColor = script;
 		} else {
-			alert('Try again! Please say a color.');
+			let errorMsg = document.createElement('div');
+			errorMsg.classList.add('error');
+			errorMsg.innerHTML = `The word(s) detected were:<br><h3>${script}</h3>This is not a valid color. Please try again!`;
+			title.appendChild(errorMsg);
+			setTimeout(() => {
+				title.removeChild(errorMsg);
+			}, 3000);
+			console.log('Try again! Please say a color.');
 		}
 	}
 };
