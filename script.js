@@ -15,10 +15,7 @@ rec.onresult = function (e) {
 		const script = e.results[i][0].transcript.toLowerCase().trim();
 
 		if (isValidColor(script)) {
-			let errorMsg = document.querySelector('.error');
-			if (errorMsg) {
-				title.removeChild(errorMsg);
-			}
+			removeErr();
 			document.body.style.backgroundColor = script;
 		} else {
 			let errorMsg = document.createElement('div');
@@ -26,12 +23,18 @@ rec.onresult = function (e) {
 			errorMsg.innerHTML = `The word(s) detected were:<br><h3>${script}</h3>This is not a valid color. Please try again!`;
 			title.appendChild(errorMsg);
 			setTimeout(() => {
-				title.removeChild(errorMsg);
-			}, 3000);
-			console.log('Try again! Please say a color.');
+				removeErr();
+			}, 5000);
 		}
 	}
 };
+
+function removeErr() {
+	let errorMsg = document.querySelector('.error');
+	if (errorMsg) {
+		title.removeChild(errorMsg);
+	}
+}
 
 function isValidColor(strColor) {
 	var s = new Option().style;
