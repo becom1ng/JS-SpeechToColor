@@ -12,14 +12,36 @@ h1 {
 	text-shadow: 0 0 2px white;
 }
 
-.buttons button {
+button {
 	display: inline-block;
 	padding: 10px 20px;
 	margin: 0 10px;
-	border: 1px solid #ccc;
+	/* border: 1px solid #ccc; */
 	border-radius: 5px;
 	background: #eee;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 	font-size: 20px;
 	font-weight: 300;
+}
+
+button:hover {
+	background-color: red;
+}
+
+button:active {
+	box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+		inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.buttons .large {
+	transform: scale(1.2);
+}
+
+.buttons .small {
+	transform: scale(0.8);
+}
+
+.buttons .stopclick {
+	transform: scale(1.2);
+	transition: all 0.05s;
 }
